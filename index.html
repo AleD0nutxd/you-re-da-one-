@@ -32,45 +32,25 @@
       margin-bottom: 10px;
     }
 
-    p {
-      color: #4a148c;
-      font-size: 1.1em;
-    }
+    p { color: #4a148c; font-size: 1.1em; }
 
-    /* Música */
-    .music-note {
-      margin-top: 18px;
-      font-size: 0.9rem;
-      opacity: 0.6;
+    .music-button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #6a1b9a;
+      color: white;
+      border: none;
+      border-radius: 25px;
       cursor: pointer;
-      transition: opacity .3s ease;
+      transition: all 0.3s ease;
     }
 
-    .music-note:hover {
-      opacity: 0.9;
-    }
+    .secret { margin-top: 20px; cursor: pointer; opacity: 0.7; }
+    .hidden-msg { opacity: 0; transition: opacity 0.5s; color: #6a1b9a; font-weight: bold; }
+    .secret:hover + .hidden-msg { opacity: 1; }
 
-    /* Mensaje oculto */
-    .hidden-msg {
-      opacity: 0;
-      transition: opacity .4s ease;
-      font-size: .95rem;
-      margin-top: 6px;
-    }
-
-    .secret:hover + .hidden-msg {
-      opacity: 1;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: scale(0.9); }
-      to { opacity: 1; transform: scale(1); }
-    }
-
-    @keyframes float {
-      from { transform: translateY(0); }
-      to { transform: translateY(-10px); }
-    }
+    @keyframes fadeIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+    @keyframes float { from { transform: translateY(0); } to { transform: translateY(-10px); } }
   </style>
 </head>
 <body>
@@ -79,25 +59,28 @@
     <h1>🎉 Happy Birthday, Mía 🎉</h1>
     <p>Que tu día sea tan perfecto como un ángulo de 45° ✨</p>
 
-    <!-- Música -->
-    <audio id="bgm" loop muted>
-      <source src="espresso_instrumental.mp3" type="audio/mp3">
+    <audio id="bgm" loop>
+      <source src="Sabrina Carpenter - Espresso (Official Instrumental)(MP3_320K).mp3" type="audio/mpeg">
     </audio>
+    <button id="musicBtn" class="music-button">🎵 Reproducir Música</button>
 
-    <p id="musicTrigger" class="music-note">🎵 tocar para activar música</p>
-
-    <!-- Mensaje escondido -->
-    <p class="secret">☁️ tocar aquí</p>
+    <p class="secret">☁️ toca aquí para una sorpresa</p>
     <p class="hidden-msg">Espero que hoy sonrías más de lo normal ✨</p>
   </div>
 
   <script>
-    document.getElementById("musicTrigger").addEventListener("click", () => {
-      const audio = document.getElementById("bgm");
-      audio.muted = false;
-      audio.play();
+    const audio = document.getElementById("bgm");
+    const musicBtn = document.getElementById("musicBtn");
+
+    musicBtn.addEventListener("click", () => {
+      if (audio.paused) {
+        audio.play();
+        musicBtn.innerText = "⏸️ Pausar Música";
+      } else {
+        audio.pause();
+        musicBtn.innerText = "🎵 Reproducir Música";
+      }
     });
   </script>
-
 </body>
 </html>
